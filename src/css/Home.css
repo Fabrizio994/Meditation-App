@@ -1,0 +1,11 @@
+img {
+  width: 80%;
+  max-width: 700px;
+}
+
+.link {
+  text-decoration: none;
+  color: whitesmoke;
+  font-size: large;
+  font-weight: 900;
+}

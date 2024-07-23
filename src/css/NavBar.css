@@ -1,0 +1,13 @@
+/* .rubik-bubbles-regular {
+  font-family: "Rubik Bubbles", system-ui;
+  font-weight: 400;
+  font-style: normal;
+} */
+
+h1 {
+  font-family: "Rubik Bubbles", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.81);
+  margin-top: 10px;
+}
