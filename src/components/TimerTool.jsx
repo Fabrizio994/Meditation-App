@@ -10,8 +10,10 @@ const TimerTool = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [selectedAudio, setSelectedAudio] = useState("");
   const [volume, setVolume] = useState(0.5);
+
   const timerRef = useRef(null);
   const audioRef = useRef(new Audio());
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (isRunning && time > 0) {
@@ -30,16 +32,23 @@ const TimerTool = () => {
     audioRef.current.volume = volume;
   }, [volume]);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   const handleVolumeChange = (e) => {
     setVolume(e.target.value);
   };
 
-  const handleSetTimer = () => {
-    const minutes = parseInt(inputValue, 10);
-    if (isNaN(minutes) || minutes <= 0) return;
-    setTime(minutes * 60);
-    setInputValue("");
-    setIsRunning(false);
+  const handleInputChange = (e) => {
+    const minutes = parseInt(e.target.value, 10);
+    setInputValue(e.target.value);
+    if (!isNaN(minutes) && minutes > 0) {
+      setTime(minutes * 60);
+      setIsRunning(false);
+    }
   };
 
   const handleStart = () => {
@@ -60,57 +69,78 @@ const TimerTool = () => {
   const handleReset = () => {
     setIsRunning(false);
     setTime(0);
-    audioRef.current.pause();
+    setInputValue("");
     audioRef.current.currentTime = 0;
   };
 
   return (
-    <div className="text-center">
-      <h2>
+    <div className="container text-center mt-5">
+      <h2 className="mb-4">
         {Math.floor(time / 60)}:{time % 60 < 10 ? `0${time % 60}` : time % 60}
       </h2>
-      <input
-        type="number"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder="Minuti"
-        required
-      />
-      <button onClick={handleSetTimer} disabled={isRunning}>
-        Imposta
-      </button>
-      <button onClick={handleStart} disabled={isRunning}>
-        Avvia
-      </button>
-      <button onClick={handlePause} disabled={!isRunning}>
-        Pausa
-      </button>
-      <button onClick={handleReset}>Reset</button>
-      {}
-      <div style={{ marginTop: "10px" }}>
-        <label>
-          Volume:
+      <div className="row mb-3 justify-content-center">
+        <div className="col-md-4">
           <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolumeChange}
+            type="number"
+            className="form-control"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder="Minuti"
+            required
+            ref={inputRef}
           />
-        </label>
+        </div>
       </div>
-      {}
-      <div>
-        <select
-          value={selectedAudio}
-          onChange={(e) => setSelectedAudio(e.target.value)}
-        >
-          <option value="">Seleziona un audio</option>
-          <option value={Audio1}>Audio 1</option>
-          <option value={Audio2}>Audio 2</option>
-          <option value={Audio3}>Audio 3</option>
-        </select>
+      <div className="row mb-3 justify-content-center">
+        <div className="col-md-4">
+          <button
+            className="btn btn-success me-1"
+            onClick={handleStart}
+            disabled={isRunning}
+          >
+            Avvia
+          </button>
+          <button
+            className="btn btn-warning me-1"
+            onClick={handlePause}
+            disabled={!isRunning}
+          >
+            Pausa
+          </button>
+          <button className="btn btn-danger" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
+      </div>
+      <div className="row mb-3">
+        <div className="col">
+          <label>
+            Volume:
+            <input
+              type="range"
+              className="form-range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+          </label>
+        </div>
+      </div>
+      <div className="row mb-3 justify-content-center">
+        <div className="col-md-4  ">
+          <select
+            className="form-select"
+            value={selectedAudio}
+            onChange={(e) => setSelectedAudio(e.target.value)}
+          >
+            <option value="">Seleziona un audio</option>
+            <option value={Audio1}>Audio 1</option>
+            <option value={Audio2}>Audio 2</option>
+            <option value={Audio3}>Audio 3</option>
+          </select>
+        </div>
       </div>
     </div>
   );

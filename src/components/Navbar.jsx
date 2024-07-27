@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import "../css/NavBar.css";
-<css />;
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -32,8 +31,8 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to={`/HowTo`}>
-                  HowTo
+                <Link className="nav-link" to={`/Blog`}>
+                  Blog
                 </Link>
               </li>
             </ul>

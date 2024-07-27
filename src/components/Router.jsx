@@ -1,5 +1,5 @@
 import Home from "../pages/Home";
-import HowTo from "../pages/HowTo";
+import Blog from "../pages/Blog";
 import Timer from "../pages/Timer";
 
 import { createBrowserRouter } from "react-router-dom";
@@ -10,8 +10,8 @@ const router = createBrowserRouter([
     element: <Home></Home>,
   },
   {
-    path: "/HowTo",
-    element: <HowTo></HowTo>,
+    path: "/Blog",
+    element: <Blog></Blog>,
   },
   {
     path: "/Timer",
