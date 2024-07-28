@@ -1,12 +1,13 @@
 import Navbar from "../components/Navbar.jsx";
 import { Link } from "react-router-dom";
-import MedPos from "../img/med-image.jpg";
-
-import "../css/Home.css";
+import MedPos from "../assets/img/med-image.jpg";
+import Footer from "../components/Footer.jsx";
+import "../assets/css/Home.css";
 function Home() {
   return (
     <>
       <Navbar />
+
       <div className="text-center">
         <img src={MedPos} alt="Med-pos" />
       </div>
@@ -22,6 +23,7 @@ function Home() {
           </Link>
         </button>
       </div>
+      <Footer />
     </>
   );
 }

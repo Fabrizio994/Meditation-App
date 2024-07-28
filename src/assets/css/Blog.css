@@ -1,0 +1,11 @@
+.container-text {
+  margin: 5% 20%;
+}
+.container-text p {
+  margin: 2% 25%;
+  font-size: large;
+  font-weight: bold;
+}
+h2 {
+  margin-bottom: 6%;
+}

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-import Audio1 from "../audio/audio_1.mp3";
-import Audio2 from "../audio/audio_2.mp3";
-import Audio3 from "../audio/audio_3.mp3";
+import Audio1 from "../assets/audio/audio_1.mp3";
+import Audio2 from "../assets/audio/audio_2.mp3";
+import Audio3 from "../assets/audio/audio_3.mp3";
 
 const TimerTool = () => {
   const [inputValue, setInputValue] = useState("");
@@ -79,7 +79,7 @@ const TimerTool = () => {
         {Math.floor(time / 60)}:{time % 60 < 10 ? `0${time % 60}` : time % 60}
       </h2>
       <div className="row mb-3 justify-content-center">
-        <div className="col-md-4">
+        <div className="col-md-4 text-center">
           <input
             type="number"
             className="form-control"

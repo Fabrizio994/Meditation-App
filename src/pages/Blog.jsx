@@ -1,32 +1,53 @@
 import Navbar from "../components/Navbar.jsx";
 import Card from "../components/Card.jsx";
-import Blog1 from "../img/Blog1.jpg";
-import Blog2 from "../img/Blog2.jpg";
-import Blog3 from "../img/Blog3.jpg";
+import articlesContent from "../components/content.jsx";
+import { useState } from "react";
+import Footer from "../components/Footer.jsx";
+
+import "../assets/css/Blog.css";
 function Blog() {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+
+  const handleReadClick = (index) => {
+    setSelectedArticle(index);
+  };
+
   return (
     <>
       <Navbar />
-      <div className="row justify-content-center text-center">
-        <Card
-          title="Meditazione Mattutina: Inizia la Tua Giornata con Consapevolezza e Speranza"
-          text="Risveglia la Tua Mente e il Tuo Cuore per un Nuovo Inizio"
-        >
-          {Blog1}
-        </Card>
-        <Card
-          title="Rilassamento Muscolare Delicato per il Burnout e la Fatica Cronica"
-          text="Guida a una Profonda Guarigione e Rilassamento"
-        >
-          {Blog2}
-        </Card>
-        <Card
-          title="Meditazione di Consapevolezza: Alleviare lo Stress e le Preoccupazioni"
-          text="Ritrova la Calma Interiore e l'Equilibrio Emotivo"
-        >
-          {Blog3}
-        </Card>
+      <div className="text-center">
+        {selectedArticle === null ? (
+          <div className="row justify-content-center text-center">
+            {articlesContent.map((article, index) => (
+              <Card
+                key={index}
+                title={article.title}
+                text={article.text}
+                img={article.img}
+                onRead={() => handleReadClick(index)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center container-text">
+            <h2 className="text-center">
+              {articlesContent[selectedArticle].title}
+            </h2>
+            {articlesContent[selectedArticle].paragraphs.map(
+              (paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              )
+            )}
+            <button
+              className="btn btn-secondary d-block mx-auto"
+              onClick={() => setSelectedArticle(null)}
+            >
+              Close
+            </button>
+          </div>
+        )}
       </div>
+      <Footer />
     </>
   );
 }
